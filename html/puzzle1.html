@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <title>Picture Puzzle</title>
+        <script src="../script.js"></script>
+        <link rel="stylesheet" href="../style.css">
+        <script>
+            initialize = () => {
+                let grid_pieces = ""
+                for(let i = 0; i < 16; i++){
+                    grid_pieces += `<div class='grid-item'><img id = 'img-${i}' onclick= 
+                    'pieceSelected(${i})' src='../images/harry potter/image_part_${String(i+1).padStart(3,'0')}.jpg'>
+                    </div>`; 
+                    grid[i] = `../images/harry potter/image_part_${String(i+1).padStart(3,'0')}.jpg`
+                }
+                document.querySelector('.grid-container').innerHTML = grid_pieces
+                originalGrid = {...grid}
+                
+                document.getElementById('restart-btn').addEventListener('click', function(){
+                    gameOn = false
+                    grid = {...originalGrid}
+                    document.getElementById('score').innerHTML = score
+                    document.getElementById('outcome').innerHTML = ""
+                    score = 0
+                    document.getElementById('score').innerHTML = 0
+                    updateGrid()
+                })
+                document.getElementById('back-btn').addEventListener('click', function(){location.href='index.html'})
+            }
+        </script>
+        
+        
+    </head>
+    <body onload="initialize()">
+        
+        <h1>Picture Puzzle</h1><hr>
+        <p style="font-size:20px;">Press the "Shuffle" button to begin.</p>
+		<h2 id='outcome' style="color:red"></h2>
+        <h2 id="score">0</h2>
+        <div id='grid'>
+            <div class="grid-container">
+                
+            </div>
+            <a href="https://www.themoviedb.org/movie/12445-harry-potter-and-the-deathly-hallows-part-2/images/posters">image source</a><br>
+            <button onclick="rearrangeGrid()">Shuffle</button>
+            <button id='restart-btn'>Restart</button>
+        </div>
+        
+        <button id='back-btn'>Back</button>
+        
+    </body>
+</html>
